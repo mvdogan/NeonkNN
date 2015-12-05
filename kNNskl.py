@@ -3,14 +3,14 @@ import sklearn.neighbors import KNeighborsClassifier
 import sklearn.metrics
 import time
 
-def processImage(imageName, blockSideSize=7, resizeTo = None):
+def processImage(imageName, blockSideSize=7, resizeTo = 0.1):
 
     import numpy as np
     import math
     import PIL.Image 
     
-    imagePath  = "../Original/train/"+imageName
-    skinPath = "../Skin/train/"+imageName[0:-4]+"_s.bmp"
+    imagePath  = "Users/mvijayen/bda/Original/train/"+imageName
+    skinPath = "Users/mvijayen/bda/Skin/train/"+imageName[0:-4]+"_s.bmp"
     skin = PIL.Image.open(skinPath)
     image = PIL.Image.open(imagePath)
     imSizeX,imSizeY = image.size
