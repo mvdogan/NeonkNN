@@ -74,7 +74,7 @@ def processImage(imageName, blockSideSize=7, resizeTo = 0.1):
     
     return (np.asarray(samples, dtype=np.uint8))
 
-f = open("/Users/tdogan/Desktop/k1bs7.txt",'a')
+f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
 img_train = np.loadtxt("/Users/tdogan/Desktop/test.txt")
 img_val = np.loadtxt("/Users/tdogan/Desktop/test2.txt")
 X_train = img_train[:,0:-1]
