@@ -116,7 +116,4 @@ np.savetxt("/Users/mvijayen/bda_project/processed/k1bs7.txt",cm_vals[None],fmt='
 
 #tp = cm[0][0], fp = cm[0][1], fn = cm[1][0], tn = cm[1][1]
 #f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
-#processImage(originalPath+original_train[0], skinPath+skin
 #img_val = os.listdir("/Users/tdogan/Desktop/Original/validate/")
-#img_train = np.loadtxt("/Users/tdogan/Desktop/test.txt")
-#img_val = np.loadtxt("/Users/tdogan/Desktop/test2.txt")
