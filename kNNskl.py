@@ -87,7 +87,6 @@ def pixelArray (originalPath, skinPath, imgNames):
     return pixels
     
 
-f = open("/Users/mvijayen/bda_project/processed/k1bs7.txt",'a')
 originalTrainPath = "/Users/mvijayen/bda_project/Original/train/"
 skinTrainPath = "/Users/mvijayen/bda_project/Skin/train/"
 imgTrainNames = [f for f in os.listdir(originalTrainPath) if not f.startswith('.')]
@@ -113,8 +112,7 @@ knn_time = knn_end - knn_start
 percent_accuracy = sklearn.metrics.accuracy_score(Y_val, predictYval, normalize=True, sample_weight=None)*100
 cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)
 cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
-np.savetxt(f,cm_vals[None],fmt='%d')
-f.close()
+np.savetxt("/Users/mvijayen/bda_project/processed/k1bs7.txt",cm_vals[None],fmt='%d')
 
 #tp = cm[0][0], fp = cm[0][1], fn = cm[1][0], tn = cm[1][1]
 #f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
