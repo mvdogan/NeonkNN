@@ -86,15 +86,15 @@ def pixelArray (originalPath, skinPath, imgNames):
     return pixels
     
 
-f = open("/Users/tdogan/Desktop/processed/k1bs7.txt",'a')
-originalTrainPath = "/Users/tdogan/Desktop/Original/train/"
-skintrainPath = "/Users/tdogan/Desktop/Skin/train/"
+f = open("/Users/mvijayen/bda_project/processed/k1bs7.txt",'a')
+originalTrainPath = "/Users/mvijayen/bda_project/Original/train/"
+skintrainPath = "/Users/mvijayen/bda_project/Skin/train/"
 imgTrainNames = os.listdir(originalTrainPath)
 img_train = pixelArray(originalTrainPath, skintrainPath, imgTrainNames) 
 
 
-originalValPath = "/Users/tdogan/Desktop/Original/val/"
-skinValPath = "/Users/tdogan/Desktop/Skin/val/"
+originalValPath = "/Users/mvijayen/bda_project/Original/val/"
+skinValPath = "/Users/mvijayen/bda_project/Skin/val/"
 imgValNames = os.listdir(originalValPath)
 img_val = pixelArray(originalValPath, skinValPath, imgValNames)
 
