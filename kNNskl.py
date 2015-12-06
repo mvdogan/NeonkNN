@@ -3,14 +3,16 @@ import sklearn.neighbors import KNeighborsClassifier
 import sklearn.metrics
 import time
 
-def processImage(imageName, blockSideSize=7, resizeTo = 0.1):
+def processImage(originalPath, skinPath, imageName, blockSideSize=7, resizeTo = 0.1):
 
     import numpy as np
     import math
     import PIL.Image 
     
-    imagePath  = "Users/mvijayen/bda/Original/train/"+imageName
-    skinPath = "Users/mvijayen/bda/Skin/train/"+imageName[0:-4]+"_s.bmp"
+    #imagePath  = "Users/mvijayen/bda/Original/train/"+imageName
+    #skinPath = "Users/mvijayen/bda/Skin/train/"+imageName[0:-4]+"_s.bmp"
+    imagePath  = originalPath+imageName
+    skinPath = skinPath+imageName[0:-4]+"_s.bmp"
     skin = PIL.Image.open(skinPath)
     image = PIL.Image.open(imagePath)
     imSizeX,imSizeY = image.size
@@ -74,11 +76,29 @@ def processImage(imageName, blockSideSize=7, resizeTo = 0.1):
     
     return (np.asarray(samples, dtype=np.uint8))
 
-f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
-img_train = os.listdir("/Users/mvijayen/bda/Original/train/")
-img_val = 
-#img_train = np.loadtxt("/Users/tdogan/Desktop/test.txt")
-#img_val = np.loadtxt("/Users/tdogan/Desktop/test2.txt")
+
+def pixelArray (originalPath, skinPath, imgNames):
+    for i,fname in enumerate(imgNames):
+    if i==0:
+        pixels = processImage(originalPath, skinPath, fname)
+    else:
+        pixels = np.concatenate((pixels,processImage(originalPath, skinPath, fname)), axis=0)
+    return pixels
+    
+
+f = open("/Users/tdogan/Desktop/processed/k1bs7.txt",'a')
+originalTrainPath = "/Users/tdogan/Desktop/Original/train/"
+skintrainPath = "/Users/tdogan/Desktop/Skin/train/"
+imgTrainNames = os.listdir(originalTrainPath)
+img_train = pixelArray(originalTrainPath, skintrainPath, imgTrainNames) 
+
+
+originalValPath = "/Users/tdogan/Desktop/Original/val/"
+skinValPath = "/Users/tdogan/Desktop/Skin/val/"
+imgValNames = os.listdir(originalValPath)
+img_val = pixelArray(originalValPath, skinValPath, imgValNames)
+
+
 X_train = img_train[:,0:-1]
 Y_train = img_train[:-1]
 X_val = img_val[:,0:-1]
@@ -95,3 +115,9 @@ cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)
 cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [knn_time]))
 np.savetxt(f,cm_vals[None],fmt='%d')
 f.close()
+
+#f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
+#processImage(originalPath+original_train[0], skinPath+skin
+#img_val = os.listdir("/Users/tdogan/Desktop/Original/validate/")
+#img_train = np.loadtxt("/Users/tdogan/Desktop/test.txt")
+#img_val = np.loadtxt("/Users/tdogan/Desktop/test2.txt")
