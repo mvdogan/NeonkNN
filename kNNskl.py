@@ -1,5 +1,6 @@
 import numpy as np
-import sklearn.neighbors import KNeighborsClassifier
+import os
+from sklearn.neighbors import KNeighborsClassifier
 import sklearn.metrics
 import time
 
@@ -79,30 +80,30 @@ def processImage(originalPath, skinPath, imageName, blockSideSize=7, resizeTo = 
 
 def pixelArray (originalPath, skinPath, imgNames):
     for i,fname in enumerate(imgNames):
-    if i==0:
-        pixels = processImage(originalPath, skinPath, fname)
-    else:
-        pixels = np.concatenate((pixels,processImage(originalPath, skinPath, fname)), axis=0)
+        if i==0:
+            pixels = processImage(originalPath, skinPath, fname)
+        else:
+            pixels = np.concatenate((pixels,processImage(originalPath, skinPath, fname)), axis=0)
     return pixels
     
 
 f = open("/Users/mvijayen/bda_project/processed/k1bs7.txt",'a')
 originalTrainPath = "/Users/mvijayen/bda_project/Original/train/"
-skintrainPath = "/Users/mvijayen/bda_project/Skin/train/"
-imgTrainNames = os.listdir(originalTrainPath)
-img_train = pixelArray(originalTrainPath, skintrainPath, imgTrainNames) 
+skinTrainPath = "/Users/mvijayen/bda_project/Skin/train/"
+imgTrainNames = [f for f in os.listdir(originalTrainPath) if not f.startswith('.')]
+img_train = pixelArray(originalTrainPath, skinTrainPath, imgTrainNames) 
 
 
 originalValPath = "/Users/mvijayen/bda_project/Original/val/"
 skinValPath = "/Users/mvijayen/bda_project/Skin/val/"
-imgValNames = os.listdir(originalValPath)
+imgValNames = [f for f in os.listdir(originalValPath) if not f.startswith('.')]
 img_val = pixelArray(originalValPath, skinValPath, imgValNames)
 
 
 X_train = img_train[:,0:-1]
-Y_train = img_train[:-1]
+Y_train = img_train[:,-1]
 X_val = img_val[:,0:-1]
-Y_val = img_val[:-1]
+Y_val = img_val[:,-1]
 knn_start = time.time()
 knn = KNeighborsClassifier(n_neighbors=1, weights='uniform', algorithm='brute', metric='minkowski', p=2, metric_params=None)    
 knn.fit(X_train,Y_train)
@@ -111,11 +112,11 @@ knn_end = time.time()
 knn_time = knn_end - knn_start
 percent_accuracy = sklearn.metrics.accuracy_score(Y_val, predictYval, normalize=True, sample_weight=None)*100
 cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)
-#tp = cm[0][0], fp = cm[0][1], fn = cm[1][0], tn = cm[1][1]
-cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [knn_time]))
+cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
 np.savetxt(f,cm_vals[None],fmt='%d')
 f.close()
 
+#tp = cm[0][0], fp = cm[0][1], fn = cm[1][0], tn = cm[1][1]
 #f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
 #processImage(originalPath+original_train[0], skinPath+skin
 #img_val = os.listdir("/Users/tdogan/Desktop/Original/validate/")
