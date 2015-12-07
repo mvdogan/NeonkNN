@@ -122,7 +122,7 @@ with open("/Shared/bdagroup5/kNNprocessed/k1bs7.txt",'a') as fn:
         percent_accuracy = sklearn.metrics.accuracy_score(Y_val, predictYval, normalize=True, sample_weight=None)*100
         cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)
         cm_vals = np.concatenate(([i], [cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
-        np.savetxt(fn ,cm_vals[None],fmt='%d, %d %d %d %f %f')
+        np.savetxt(fn ,cm_vals[None],fmt='%s %d, %d %d %d %f %f')
 
 #tp = cm[0][0], fp = cm[0][1], fn = cm[1][0], tn = cm[1][1]
 #f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
