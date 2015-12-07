@@ -99,6 +99,7 @@ knn = KNeighborsClassifier(n_neighbors=1, weights='uniform', algorithm='brute', 
 knn.fit(X_train,Y_train)
 knn_fit_end = time.time()
 fit_time = knn_fit_end - knn_fit_start
+print fit_time
 print train_shape
 print "X and Y train complete"
 
@@ -118,11 +119,13 @@ with open("/Shared/bdagroup5/kNNprocessed/k1bs7.txt",'a') as fn:
         predictYval = knn.predict(X_val)
         knn_predict_end = time.time()
         predict_time = knn_predict_end - knn_predict_start
+        print predict_time
         knn_time = fit_time + predict_time
         percent_accuracy = sklearn.metrics.accuracy_score(Y_val, predictYval, normalize=True, sample_weight=None)*100
         cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)
-        cm_vals = np.concatenate(([i], [cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
-        np.savetxt(fn ,cm_vals[None],fmt='%s %d, %d %d %d %f %f')
+        cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
+        print cm_vals
+        np.savetxt(fn ,cm_vals[None],fmt='%d, %d %d %d %f %f')
 
 #tp = cm[0][0], fp = cm[0][1], fn = cm[1][0], tn = cm[1][1]
 #f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
