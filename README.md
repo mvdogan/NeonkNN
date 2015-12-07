@@ -1,11 +1,13 @@
 # NeonkNN
 
-Use `./kNNskl.py` to run scikit-learn kNN
+Use `python kNNskl.py` to run scikit-learn kNN on Neon
 
-kNN.py is still undergoing work. Will complete if necessary (i.e. based on performance of kNNskl.py)
 
-##### To do:
-  * Loop through files in folder - how many training images and which validation images?
-  * Add header to output
-  * Add validation image name to first column of output file - maybe
-  * Integrate processImage
+##### To do (Updated on 12/07/15):
+  * Use 1,300 images as training data;
+  * Test all 2,000 images using the basic setting and generate confusion matrix as well as binary image files;
+
+
+> The following will probably be discarded:
+
+> kNN.py is still undergoing work. Will complete if necessary (i.e. based on performance of kNNskl.py)
