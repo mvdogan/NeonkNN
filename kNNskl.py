@@ -5,14 +5,20 @@ import sklearn.metrics
 from utils import processImage, pixelArray
 from sklearn.neighbors import KNeighborsClassifier
 
+# Path
 originalTrainPath = "/Shared/bdagroup5/Original/train/"
 skinTrainPath = "/Shared/bdagroup5/Skin/train/"
+
+# Load training samples
 imgTrainNames = [f for f in os.listdir(originalTrainPath) if not f.startswith('.')]
 img_train = pixelArray(originalTrainPath, skinTrainPath, imgTrainNames)
 train_shape = img_train.shape
 X_train = img_train[:,0:-1]
 Y_train = img_train[:,-1]
+
+# Timing: start
 knn_fit_start = time.time()
+
 knn = KNeighborsClassifier(n_neighbors=1, weights='uniform', algorithm='brute', metric='minkowski', p=2, metric_params=None)    
 knn.fit(X_train,Y_train)
 knn_fit_end = time.time()
@@ -21,9 +27,11 @@ print fit_time
 print train_shape
 print "X and Y train complete"
 
+# Load validation samples
 originalValPath = "/Shared/bdagroup5/Original/val/"
 skinValPath = "/Shared/bdagroup5/Skin/val/"
 imgValNames = [f for f in os.listdir(originalValPath) if not f.startswith('.')]
+# control the number
 imgValNames = imgValNames[0:2]
 print imgValNames
 
