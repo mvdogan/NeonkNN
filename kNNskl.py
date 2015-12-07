@@ -111,7 +111,7 @@ print imgValNames
 with open("/Shared/bdagroup5/kNNprocessed/k1bs7.txt",'a') as fn:
     for i in imgValNames:
         print i
-        img_val = pixelArray(originalValPath, skinValPath, i)
+        img_val = processImage(originalValPath, skinValPath, i)
         X_val = img_val[:,0:-1]
         Y_val = img_val[:,-1]
         knn_predict_start = time.time()
