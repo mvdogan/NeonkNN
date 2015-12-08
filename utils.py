@@ -74,11 +74,11 @@ def processImage(originalPath, skinPath, imageName, blockSideSize=7, resizeTo = 
     
     return (np.asarray(samples, dtype=np.uint8))
 
-def pixelArray (originalPath, skinPath, imgNames):
+def pixelArray (originalPath, skinPath, imgNames, blockSize=7):
     for i,fname in enumerate(imgNames):
         if i==0:
-            pixels = processImage(originalPath, skinPath, fname)
+            pixels = processImage(originalPath, skinPath, fname, blockSideSize=blockSize)
         else:
-            pixels = np.concatenate((pixels,processImage(originalPath, skinPath, fname)), axis=0)
+            pixels = np.concatenate((pixels,processImage(originalPath, skinPath, fname, blockSideSize=blockSize)), axis=0)
     return pixels
     
