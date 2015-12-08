@@ -45,7 +45,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
         for i in imgValNames:
             print 'Working on the {}th images!'.format(counter)
             #print i,
-            img_val = processImage(originalValPath, skinValPath, i)
+            img_val = processImage(originalValPath, skinValPath, i, blockSize=block_size)
             X_val = img_val[:,0:-1]
             Y_val = img_val[:,-1]
             knn_predict_start = time.time()
