@@ -75,6 +75,7 @@ def processImage(originalPath, skinPath, imageName, blockSideSize=7, resizeTo = 
     return (np.asarray(samples, dtype=np.uint8))
 
 def pixelArray (originalPath, skinPath, imgNames, blockSize=7):
+    import numpy as np
     for i,fname in enumerate(imgNames):
         if i==0:
             pixels = processImage(originalPath, skinPath, fname, blockSideSize=blockSize)
