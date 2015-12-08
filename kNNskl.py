@@ -46,6 +46,7 @@ with open("/Shared/bdagroup5/kNNprocessed/k1bs7.txt",'a') as fn:
         Y_val = img_val[:,-1]
         knn_predict_start = time.time()
         predictYval = knn.predict(X_val)
+        upscaleBinary(predictYval,i,0.1)
         knn_predict_end = time.time()
         predict_time = knn_predict_end - knn_predict_start
         print predict_time,
