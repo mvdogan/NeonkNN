@@ -38,10 +38,12 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     #imgValNames = imgValNames[0:2]
     #print imgValNames
 
+    counter = 1
     with open("/Shared/bdagroup5/kNNprocessed/{}".format(logfile),'w') as fn:
         # writer for this filename fn
         w = csv.writer(fn)
         for i in imgValNames:
+            print 'Working on the %th images!' % counter
             #print i,
             img_val = processImage(originalValPath, skinValPath, i)
             X_val = img_val[:,0:-1]
@@ -58,6 +60,8 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
 
             # Use csv.writerow()
             w.writerow([i] + cm.flatten().tolist() + [percent_accuracy, knn_time])
+
+            counter += 1
 
             #np.savetxt(fn ,cm_vals[None],fmt='%d, %d %d %d %f %f')
             #print cm_vals
