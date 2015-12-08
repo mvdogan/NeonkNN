@@ -5,6 +5,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     import time
     import numpy as np
     import sklearn.metrics
+    from scipy import stats
     from utils import processImage, pixelArray
     from sklearn.neighbors import KNeighborsClassifier
 
@@ -26,7 +27,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     # Timing: start
     knn_fit_start = time.time()
 
-    knn = KNeighborsClassifier(n_neighbors=k, weights='uniform', algorithm='brute', metric='minkowski', p=2, metric_params=None)    
+    knn = KNeighborsClassifier(n_neighbors=k, weights='uniform', algorithm='auto', metric='minkowski', p=2, metric_params=None)    
     fitting = knn.fit(X_train,Y_train)
     knn_fit_end = time.time()
     fit_time = knn_fit_end - knn_fit_start
@@ -66,7 +67,24 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
 
             # Use csv.writerow()
             #w.writerow([i] + cm.flatten().tolist() + [percent_accuracy, knn_time])
-            w.writerow([i] + [dist, train_pi_time, knn_time])
+
+            # Match the indices to their corresponding classes
+            dist_array, ind_array = dist[0], dist[1]
+            cls_array = _match_class(Y_train, ind_array)
+
+            output_row = [i, knn_time] 
+
+            # for each k, get confusion matrix
+            for ki in range(1, k+1, 2):
+                sub_cls_array = cls_array[:, :ki]
+                # find the mode in each row
+                _pred = stats.mode(sub_cls_array, axis=1)[0].flatten().tolist()
+                cm = sklearn.metrics.confusion_matrix(Y_val, _pred)        
+                # output the flattened confusion matrix
+                output_row += cm.flatten().tolist()
+
+            # headers: Image name; Confusion entries for all k's; train tim
+            w.writerow(output_row)
 
             counter += 1
 
