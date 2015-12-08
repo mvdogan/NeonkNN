@@ -1,17 +1,18 @@
 #!/bin/sh
+module load python
 ## Name of job
-#$-N skinDetection
+#$-N test-1-9-1
 ## Concatenate SGE output? (recommend yes)
 #$-j Y
 ## Parallel environment
-#$-pe 16cpn 16
+#$-pe smp 1
 ## Next choose a queue
-#$-q all.q
+#$-q INFORMATICS
 ## Set the working directory to current directory
 #$-cwd
 ## Set email address
-#$-M 
+#$-M zhiya-zuo@uiowa.edu
 ## Send me email at beginning, end, abort, suspend
 #$-m beas
 ## Put your command or other application last
-/Users/mvijayen/anaconda2/bin/python /Users/mvijayen/bda_project/NeonkNN/kNNskl2.py
+python main.py 1 9 neon_1_9.csv
