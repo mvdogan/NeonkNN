@@ -1,3 +1,16 @@
+def _match_class(y, index_matrix):
+    '''
+        Internal method to match the index for the class
+    '''
+    import numpy.matlib
+    output = numpy.matlib.zeros(index_matrix.shape, dtype=np.uint8)
+    for row in index_matrix.shape[0]:
+        # row
+        indices = index_matrix[row, :]
+        output[row] = y[indices]
+
+    return np.asarray(output)
+
 def processImage(originalPath, skinPath, imageName, blockSideSize=7, resizeTo = 0.1):
     '''
         Preprocess Image
