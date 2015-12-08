@@ -1,4 +1,5 @@
 import os
+import csv
 import time
 import numpy as np
 import sklearn.metrics
@@ -36,6 +37,8 @@ imgValNames = imgValNames[0:2]
 print imgValNames
 
 with open("/Shared/bdagroup5/kNNprocessed/k1bs7.txt",'a') as fn:
+    # writer for this filename fn
+    w = csv.writer(fn)
     for i in imgValNames:
         print i,
         img_val = processImage(originalValPath, skinValPath, i)
@@ -48,10 +51,13 @@ with open("/Shared/bdagroup5/kNNprocessed/k1bs7.txt",'a') as fn:
         print predict_time,
         knn_time = fit_time + predict_time
         percent_accuracy = sklearn.metrics.accuracy_score(Y_val, predictYval, normalize=True, sample_weight=None)*100
-        cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)
+        cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)        
         cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
+
+        # Use csv.writerow()
+        w.writerow([i] + cm.flatten().tolist() + [percent_accuracy, knn_time])
+        #np.savetxt(fn ,cm_vals[None],fmt='%d, %d %d %d %f %f')
         print cm_vals
-        np.savetxt(fn ,cm_vals[None],fmt='%d, %d %d %d %f %f')
 
 #tp = cm[0][0], fp = cm[0][1], fn = cm[1][0], tn = cm[1][1]
 #f = open("/Users/mvijayen/bda/processed/k1bs7.txt",'a')
