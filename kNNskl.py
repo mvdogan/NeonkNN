@@ -6,8 +6,8 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     import numpy as np
     import sklearn.metrics
     from scipy import stats
-    from utils import processImage, pixelArray
     from sklearn.neighbors import KNeighborsClassifier
+    from utils import processImage, pixelArray, _match_class
 
     # Path
     originalTrainPath = "/Shared/bdagroup5/Original/train/"
