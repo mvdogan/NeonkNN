@@ -1,6 +1,6 @@
 # NeonkNN
 
-Use `python kNNskl.py` to run scikit-learn kNN on Neon
+Use `python main.py k block_size filename` to run scikit-learn kNN on Neon
 
 
 ##### To do (Updated on 12/07/15):
