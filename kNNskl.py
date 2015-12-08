@@ -14,8 +14,12 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
 
     # Load training samples
     imgTrainNames = [f for f in os.listdir(originalTrainPath) if not f.startswith('.')]
+    #imgTrainNames = imgTrainNames[0:199]
+    train_pi_start = time.time()
     img_train = pixelArray(originalTrainPath, skinTrainPath, imgTrainNames, blockSize=block_size)
-    train_shape = img_train.shape
+    train_pi_end = time.time()
+    train_pi_time = train_pi_end - train_pi_start
+    #train_shape = img_train.shape
     X_train = img_train[:,0:-1]
     Y_train = img_train[:,-1]
 
@@ -23,12 +27,12 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     knn_fit_start = time.time()
 
     knn = KNeighborsClassifier(n_neighbors=k, weights='uniform', algorithm='brute', metric='minkowski', p=2, metric_params=None)    
-    knn.fit(X_train,Y_train)
+    fitting = knn.fit(X_train,Y_train)
     knn_fit_end = time.time()
     fit_time = knn_fit_end - knn_fit_start
     #print fit_time
     #print train_shape
-    #print "X and Y train complete"
+    print "X and Y train complete"
 
     # Load validation samples
     originalValPath = "/Shared/bdagroup5/Original/val/"
@@ -49,18 +53,20 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
             X_val = img_val[:,0:-1]
             Y_val = img_val[:,-1]
             knn_predict_start = time.time()
-            predictYval = knn.predict(X_val)
+            dist = fitting.kneighbors(X_val,k,return_distance=True)
+            #predictYval = knn.predict(X_val)
             #upscaleBinary(predictYval,i,0.1)
             knn_predict_end = time.time()
             predict_time = knn_predict_end - knn_predict_start
             #print predict_time,
             knn_time = fit_time + predict_time
-            percent_accuracy = sklearn.metrics.accuracy_score(Y_val, predictYval, normalize=True, sample_weight=None)*100
-            cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)        
-            cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
+            #percent_accuracy = sklearn.metrics.accuracy_score(Y_val, predictYval, normalize=True, sample_weight=None)*100
+            #cm = sklearn.metrics.confusion_matrix(Y_val, predictYval)        
+            #cm_vals = np.concatenate(([cm[0][0]], [cm[0][1]], [cm[1][0]], [cm[1][1]], [percent_accuracy], [knn_time]))
 
             # Use csv.writerow()
-            w.writerow([i] + cm.flatten().tolist() + [percent_accuracy, knn_time])
+            #w.writerow([i] + cm.flatten().tolist() + [percent_accuracy, knn_time])
+            w.writerow([i] + [dist, train_pi_time, knn_time])
 
             counter += 1
 
