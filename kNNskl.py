@@ -43,7 +43,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
         # writer for this filename fn
         w = csv.writer(fn)
         for i in imgValNames:
-            print 'Working on the %th images!' % counter
+            print 'Working on the {}th images!'.format(counter)
             #print i,
             img_val = processImage(originalValPath, skinValPath, i)
             X_val = img_val[:,0:-1]
@@ -66,6 +66,5 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
 
             #np.savetxt(fn ,cm_vals[None],fmt='%d, %d %d %d %f %f')
             #print cm_vals
->>>>>>> 29b337070a4f29f4b468a55d84789b58f8f18f8c
 
 

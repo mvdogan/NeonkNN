@@ -143,13 +143,13 @@ def processImageRowTest(imageName, blockSideSize=7, resizeTo = None, test = 0):
             sample[0,0:numOfColsPerPartialSample]=partialSample
             if test==1:
                 partialSamples[currentSample,:] = partialSample
-            else
+            else:
                 sample[0,numOfColumnsPerSample-1] = isSkin
                 samples[currentSample,:]= sample
                 isSkin=1;
             currentSample=currentSample+1;
             
-    if test==1
+    if test==1:
         samples = partialSamples
     
     return (np.asarray(samples, dtype=np.uint8))
@@ -163,7 +163,7 @@ def pixelArray (originalPath, skinPath, imgNames, blockSize=7):
             pixels = np.concatenate((pixels,processImage(originalPath, skinPath, fname, blockSideSize=blockSize)), axis=0)
     return pixels
 
-def originalResize(createResizedImages = 0)
+def originalResize(createResizedImages = 0):
     import PIL.Image
     import os
     import numpy as np
@@ -195,7 +195,7 @@ def originalResize(createResizedImages = 0)
             imageOriginal = PIL.Image.open("/Shared/bdagroup5"+imagePath+imageName)
             originalWidth, originalHeight = imageOriginal.size
             textFile.write("{0}\t{1}\t{2}\n".format(imageName,originalWidth,originalHeight))
-            if createResizedImages == :
+            if createResizedImages == 1:
                 for resize in resizeRange:
                     imageCopy = imageOriginal.copy()
                     if resize==1.0:
