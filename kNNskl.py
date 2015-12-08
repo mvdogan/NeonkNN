@@ -3,7 +3,7 @@ import csv
 import time
 import numpy as np
 import sklearn.metrics
-from utils import processImage, pixelArray
+from utils import processImage, pixelArray, upscaleBinary
 from sklearn.neighbors import KNeighborsClassifier
 
 # Path
