@@ -6,7 +6,7 @@ def _match_class(y, index_matrix):
     import numpy.matlib
     output = numpy.matlib.zeros(index_matrix.shape, dtype=np.uint8)
     index_matrix = np.asmatrix(index_matrix)
-    for row in index_matrix.shape[0]:
+    for row in range(index_matrix.shape[0]):
         # row
         indices = index_matrix[row, :]
         output[row] = y[indices]
