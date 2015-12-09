@@ -23,6 +23,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     #train_shape = img_train.shape
     X_train = img_train[:,0:-1]
     Y_train = img_train[:,-1]
+    del X_train
 
     # Timing: start
     knn_fit_start = time.time()
@@ -55,6 +56,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
             Y_val = img_val[:,-1]
             knn_predict_start = time.time()
             dist = fitting.kneighbors(X_val,k,return_distance=True)
+            del X_val
             #predictYval = knn.predict(X_val)
             #upscaleBinary(predictYval,i,0.1)
             knn_predict_end = time.time()
