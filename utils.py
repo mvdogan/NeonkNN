@@ -2,6 +2,7 @@ def _match_class(y, index_matrix):
     '''
         Internal method to match the index for the class
     '''
+    import numpy as np
     import numpy.matlib
     output = numpy.matlib.zeros(index_matrix.shape, dtype=np.uint8)
     index_matrix = np.asmatrix(index_matrix)
