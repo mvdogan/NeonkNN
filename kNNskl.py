@@ -23,13 +23,13 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     #train_shape = img_train.shape
     X_train = img_train[:,0:-1]
     Y_train = img_train[:,-1]
-    del X_train
 
     # Timing: start
     knn_fit_start = time.time()
 
     knn = KNeighborsClassifier(n_neighbors=k, weights='uniform', algorithm='auto', metric='minkowski', p=2, metric_params=None)    
     fitting = knn.fit(X_train,Y_train)
+    del X_train
     knn_fit_end = time.time()
     fit_time = knn_fit_end - knn_fit_start
     #print fit_time
