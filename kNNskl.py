@@ -18,7 +18,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     imgTrainNames = [f for f in os.listdir(originalTrainPath) if not f.startswith('.')]
     imgTrainNames = imgTrainNames[0:1]
     train_pi_start = time.time()
-    img_train = pixelArray(originalTrainPath, skinTrainPath, imgTrainNames, blockSize=block_size,resize)
+    img_train = pixelArray(originalTrainPath, skinTrainPath, imgTrainNames, blockSize=block_size,resizeTo=resize)
     train_pi_end = time.time()
     train_pi_time = train_pi_end - train_pi_start
     #train_shape = img_train.shape
@@ -52,7 +52,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
         for i in imgValNames:
             print 'Working on the {}th images!'.format(counter)
             #print i,
-            img_val = processImageRowTest(originalValPath, skinValPath, i, blockSideSize=block_size,resize)
+            img_val = processImageRowTest(originalValPath, skinValPath, i, blockSideSize=block_size,resizeTo=resize)
             X_val = img_val[:,0:-1]
             Y_val = img_val[:,-1]
             knn_predict_start = time.time()
@@ -80,6 +80,9 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
                 sub_cls_array = cls_array[:, :ki]
                 # find the mode in each row
                 _pred = stats.mode(sub_cls_array, axis=1)[0].flatten().tolist()
+                print type(_pred)
+                print len(_pred)
+
                 if k==1:
                     upscaleBinary(_pred,i,resize)
                     

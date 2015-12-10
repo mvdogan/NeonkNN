@@ -255,9 +255,9 @@ def upscaleBinary(oneDArray,imageName,resize):
     import numpy as np
 
     # can be put in parameter but
-    fringe = 3 #6 for 7x7
+    fringe = 3 #6 for 7x
     
-    oneDArray = (oneDArray*255).tolist()
+    oneDArray = [x*255 for x in oneDArray]
     
     print "Starting upscale"
     originalResize()
