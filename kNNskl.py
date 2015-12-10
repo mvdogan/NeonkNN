@@ -7,7 +7,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     import sklearn.metrics
     from scipy import stats
     from sklearn.neighbors import KNeighborsClassifier
-    from utils import processImage, pixelArray, _match_class
+    from utils import processImageRowTest,upscaleBinary, pixelArray, _match_class
 
     # Path
     originalTrainPath = "/Shared/bdagroup5/Original/train/"
@@ -42,7 +42,7 @@ def NeonKNN(k=1, block_size=7, logfile='logfile.txt'):
     skinValPath = "/Shared/bdagroup5/Skin/val/"
     imgValNames = [f for f in os.listdir(originalValPath) if not f.startswith('.')]
     # control the number
-    #imgValNames = imgValNames[0:2]
+    imgValNames = imgValNames[0:2]
     #print imgValNames
 
     counter = 1

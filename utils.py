@@ -173,13 +173,13 @@ def processImageRowTest(originalPath,skinPath, imageName, blockSideSize=7, resiz
     return (np.asarray(samples, dtype=np.uint8))
 
 
-def pixelArray (originalPath, skinPath, imgNames, blockSize=7,resize):
+def pixelArray (originalPath, skinPath, imgNames, blockSize=7,resizeTo=0.1):
     import numpy as np
     for i,fname in enumerate(imgNames):
         if i==0:
-            pixels = processImageRowTest(originalPath, skinPath, fname, blockSideSize=blockSize,resize)
+            pixels = processImageRowTest(originalPath, skinPath, fname, blockSideSize=blockSize,resizeTo=resizeTo)
         else:
-            pixels = np.concatenate((pixels,processImageRowTest(originalPath, skinPath, fname, blockSideSize=blockSize,resize)), axis=0)
+            pixels = np.concatenate((pixels,processImageRowTest(originalPath, skinPath, fname, blockSideSize=blockSize,resizeTo=resizeTo)), axis=0)
     return pixels
 
 def originalResize(createResizedImages = 0):
