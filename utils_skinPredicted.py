@@ -266,7 +266,7 @@ def upscaleBinary(oneDArray,imageName,resize,fringe):
     
     print "Starting upscale"
     originalResize()
-    origImageSizes = open("/Shared/bdagroup5/OriginalImageSizes.txt","r")
+    origImageSizes = open("/Shared/bdagroup5/AllOriginalImageSizes.txt","r")
     data = origImageSizes.readlines()
     collectImageDimensions = []
     for eachImage in data:
@@ -316,7 +316,7 @@ def upscaleBinary(oneDArray,imageName,resize,fringe):
     originalRGBImage =  PIL.Image.fromarray(changedToRGB,'RGB')
     blackAndWhiteImage = originalRGBImage.convert('L') #comment this line and save original RGB for actual RGB skin
     #blackAndWhiteImage.save("/Shared/bdagroup5/greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
-    blackAndWhiteImage.save("./greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
+    blackAndWhiteImage.save("/Shared/bdagroup5/greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
     
     #blackAndWhiteImage.close()
     #originalRGBImage.close()
