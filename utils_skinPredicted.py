@@ -207,7 +207,8 @@ def originalResize(createResizedImages = 0):
     # to output the original sizes since resize does truncating
     # and thumbnail can give other values than the ones
     # provided(fixes one) when resizing
-    textFile = open("/Shared/bdagroup5/OriginalImageSizes.txt","w")
+    #textFile = open("/Shared/bdagroup5/OriginalImageSizes.txt","w")
+    textFile = open("./OriginalImageSizes.txt","w")
 
     originalCount = 0
 
@@ -314,7 +315,8 @@ def upscaleBinary(oneDArray,imageName,resize,fringe):
     #print changedToRGB.shape
     originalRGBImage =  PIL.Image.fromarray(changedToRGB,'RGB')
     blackAndWhiteImage = originalRGBImage.convert('L') #comment this line and save original RGB for actual RGB skin
-    blackAndWhiteImage.save("/Shared/bdagroup5/greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
+    #blackAndWhiteImage.save("/Shared/bdagroup5/greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
+    blackAndWhiteImage.save("./greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
     
     blackAndWhiteImage.close()
     originalRGBImage.close()
