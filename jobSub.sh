@@ -6,7 +6,7 @@
 ## Parallel environment
 #$-pe smp 4
 ## Next choose a queue
-#$-q COE
+#$-q AL
 ## Set the working directory to current directory
 #$-cwd
 ## Set email address
@@ -14,4 +14,4 @@
 ## Send me email at beginning, end, abort, suspend
 #$-m beas
 ## Put your command or other application last
-/Users/tosadojimenez/anaconda2/bin/python main.py 1 7 santa_1_9.csv
+/Users/tosadojimenez/anaconda2/bin/python main_skinPredicted.py 9 5 0 10
