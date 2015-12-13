@@ -14,7 +14,7 @@ Example: `python main.py 1 7` will be running kNN with 1 nearest neighbour and b
 ##### Testing (Updated on Dec/13/2015):
  Execute from inside NeonKNN folder.
  
- Create greyscaleImages at relative path ../greyscaleImages: `mkdir ../greyscaleImages`
+ Create greyscaleImages at relative path ./greyscaleImages: `mkdir ./greyscaleImages`
  
  `python main_skinPredicted.py <k> <block_size> <testIndexFrom> <testIndexTo>`
  
