@@ -288,10 +288,12 @@ def upscaleBinary(oneDArray,imageName,resize):
     binaryPredicted = PIL.Image.new('L', (resizedWidthWithFringe,resizedHeightWithFringe))
     print binaryPredicted.size
     binaryPredicted.putdata(oneDArray)
-    binaryPredicted.save("/Shared/bdagroup5/greyscaleImages/BEFORE_RESIZE_"+imageName[0:-4]+".png","PNG")    
+    #binaryPredicted.save("/Shared/bdagroup5/greyscaleImages/BEFORE_RESIZE_"+imageName[0:-4]+".png","PNG")    
+    binaryPredicted.save("./greyscaleImages/BEFORE_RESIZE_"+imageName[0:-4]+".png","PNG")    
     originalImageGrey = binaryPredicted.resize((int(original[1])-int(fringe*2/resize),int(original[2])-int(fringe*2/resize)),PIL.Image.ANTIALIAS)
     originalImageGrey = originalImageGrey.point(lambda x: 0 if x<128 else 255, '1')
-    originalImageGrey.save("/Shared/bdagroup5/greyscaleImages/predicted_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")    
+    #originalImageGrey.save("/Shared/bdagroup5/greyscaleImages/predicted_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")    
+    originalImageGrey.save("./greyscaleImages/predicted_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")    
     greyscaleData = originalImageGrey.load()
     
 ##    originalRGBImage = PIL.Image.open("..\\Original\\train\\"+imageName)
@@ -309,7 +311,8 @@ def upscaleBinary(oneDArray,imageName,resize):
 
     print changedToRGB.shape
     originalRGBImage =  PIL.Image.fromarray(changedToRGB,'RGB')
-    originalRGBImage.save("/Shared/bdagroup5/greyscaleImages/predictedRGB_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
+    #originalRGBImage.save("/Shared/bdagroup5/greyscaleImages/predictedRGB_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
+    originalRGBImage.save("./greyscaleImages/predictedRGB_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
     
     originalRGBImage.close()
     originalImageGrey.close()
