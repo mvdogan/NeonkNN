@@ -265,7 +265,7 @@ def upscaleBinary(oneDArray,imageName,resize,fringe):
     oneDArray = [x*255 for x in oneDArray]
     
     print "Starting upscale"
-    originalResize()
+    #originalResize()
     origImageSizes = open("/Shared/bdagroup5/AllOriginalImageSizes.txt","r")
     data = origImageSizes.readlines()
     collectImageDimensions = []
