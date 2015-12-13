@@ -12,7 +12,12 @@ Example: `python main.py 1 7` will be running kNN with 1 nearest neighbour and b
   * Joel - bs,resize,k = (5,0.1,1),(5,0.1,3),(5,0.1,5)
 
 ##### Testing (Updated on Dec/13/2015):
-    Execute from inside NeonKNN folder.
-    Need to manually create greyscaleImages at relative path ../greyscaleImages
-    1. python main_skinPredicted.py <k> <block_size> <testIndexFrom> <testIndexTo>
-    Example: python main_skinPredicted.py 9 5 0 2000 will produce 2000 greyscale images at ../greyscaleImages for each of the test images (from index 0 to 1999)
+ Execute from inside NeonKNN folder.
+ 
+ Create greyscaleImages at relative path ../greyscaleImages: `mkdir ../greyscaleImages`
+ 
+ `python main_skinPredicted.py <k> <block_size> <testIndexFrom> <testIndexTo>`
+ 
+ Example: `python main_skinPredicted.py 9 5 0 2000` 
+ 
+ will produce 2000 greyscale images at ../greyscaleImages for each of the test images (from index 0 to 1999)
