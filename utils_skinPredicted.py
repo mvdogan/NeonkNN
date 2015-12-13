@@ -318,7 +318,7 @@ def upscaleBinary(oneDArray,imageName,resize,fringe):
     #blackAndWhiteImage.save("/Shared/bdagroup5/greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
     blackAndWhiteImage.save("./greyscaleImages/predictedBW_resizeFrom"+str(int(resize*10))+"_"+imageName[0:-4]+".png","PNG")
     
-    blackAndWhiteImage.close()
-    originalRGBImage.close()
-    originalImageGrey.close()
-    binaryPredicted.close()
+    #blackAndWhiteImage.close()
+    #originalRGBImage.close()
+    #originalImageGrey.close()
+    #binaryPredicted.close()
